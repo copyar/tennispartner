@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+apply plugin: 'com.android.application'
+apply from: './ktlint.gradle'
 
 android {
     compileSdk 31
@@ -30,6 +32,8 @@ android {
         jvmTarget = '1.8'
     }
 }
+
+check.dependsOn ktlint
 
 dependencies {
 
