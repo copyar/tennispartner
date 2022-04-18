@@ -11,12 +11,14 @@ android {
 
     defaultConfig {
         applicationId "com.example.android.tennispartner"
-        minSdk 21
+        minSdk 23
         targetSdk 31
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [auth0Domain: "dev-18w6525q.us.auth0.com", auth0Scheme: "demo"]
+
     }
 
     buildFeatures {
