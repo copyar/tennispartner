@@ -16,13 +16,11 @@ import retrofit2.http.Headers
 
 private const val BASE_URL = "https://tennis-live-data.p.rapidapi.com/"
 
-
-//create moshi object
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-private val logger = HttpLoggingInterceptor().apply{level = HttpLoggingInterceptor.Level.BASIC}
+private val logger = HttpLoggingInterceptor().apply{ level = HttpLoggingInterceptor.Level.BASIC }
 
 private val client = OkHttpClient.Builder()
     .addInterceptor(logger)
@@ -37,14 +35,14 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiService{
 
-    @Headers("x-rapidapi-key: 08f9dd6646msh683da6dc2cdc06fp1fee21jsn7fb6de1479aa")
+    @Headers("X-RapidAPI-Key: 08f9dd6646msh683da6dc2cdc06fp1fee21jsn7fb6de1479aa")
     @GET("players")
     fun getPlayers(): Deferred<ApiPlayerContainer>
 }
 
 object PlayerApi {
-    //lazy properties = thread safe --> can only be initialized once at a time
-    //adds extra safety to our 1 instance we need.
+    // lazy properties = thread safe --> can only be initialized once at a time
+    // adds extra safety to our 1 instance we need.
     val retrofitService : ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }

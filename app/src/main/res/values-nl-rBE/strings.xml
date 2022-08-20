@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tennis Partner</string>
+    <string name="players">Spelers</string>
+    <string name="tournaments">Toernooien</string>
+    <string name="ranking">Ranking</string>
+</resources>
