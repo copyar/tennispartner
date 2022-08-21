@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Tennis Partner</string>
+    <string name="app_name">Tennis Partner</string>
     <string name="players">Players</string>
     <string name="tournaments">Tournaments</string>
     <string name="ranking">Ranking</string>
