@@ -52,7 +52,7 @@ class PlayerRepository(private val database: PlayerDatabase) {
     }
 
     // Filter
-    fun addFilter(filter: String?){
+    fun addFilter(filter: String?) {
         // remove the original source
         players.removeSource(changeableLiveData)
         // change the livedata object + apply filter
@@ -65,22 +65,22 @@ class PlayerRepository(private val database: PlayerDatabase) {
             }
         }
         // add the data to the mediator
-        players.addSource(changeableLiveData){players.setValue(it)}
+        players.addSource(changeableLiveData){ players.setValue(it) }
     }
 
 
     // filter is now less complex
-    fun addFilterSolution2(filter: String?){
+    fun addFilterSolution2(filter: String?) {
         // remove the original source
         this.filter.value = filter
     }
 
 
     // Database call
-    suspend fun refreshPlayers(){
+    suspend fun refreshPlayers(tour: String) {
         // switch context to IO thread
         withContext(Dispatchers.IO){
-            val players = PlayerApi.retrofitService.getPlayers().await()
+            val players = PlayerApi.retrofitService.getPlayersByTour(tour).await()
             // '*': kotlin spread operator.
             // Used for functions that expect a vararg param
             // just spreads the array into separate fields
@@ -94,15 +94,12 @@ class PlayerRepository(private val database: PlayerDatabase) {
     suspend fun createPlayer(newPlayer: Player): Player {
         // create a Data Transfer Object (Dto)
         val newApiPlayer = ApiPlayer(
+            id = newPlayer.id,
             firstName = newPlayer.firstName,
             lastName = newPlayer.lastName,
             country = newPlayer.country,
             fullName = newPlayer.fullName)
 
-        // use retrofit to put the player.
-        // a put function usually returns the object that was put
-
-        // val checkApiPlayer = PlayerApi.retrofitService.putPlayer(newApiPlayer).await()
         val checkApiPlayer = PlayerApi.retrofitService.mockPutPlayer(newApiPlayer)
 
         // the put results in a PlayerApi object

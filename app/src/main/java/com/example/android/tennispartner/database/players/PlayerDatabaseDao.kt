@@ -25,26 +25,22 @@ interface PlayerDatabaseDao {
     @Update
     suspend fun update(player: DatabasePlayer)
 
-    @Query("SELECT * from custom_player_table WHERE id = :key")
+    @Query("SELECT * from player WHERE id = :key")
     suspend fun get(key: Long): DatabasePlayer?
 
-    @Query("DELETE FROM custom_player_table")
+    @Query("DELETE FROM player")
     suspend fun clear()
 
-    @Query("SELECT * FROM custom_player_table ORDER BY id DESC")
+    @Query("SELECT * FROM player ORDER BY id DESC")
     suspend fun getAllPlayers(): List<DatabasePlayer>
 
-    @Query("SELECT * FROM custom_player_table ORDER BY id DESC")
+    @Query("SELECT * FROM player ORDER BY id DESC")
     fun getAllPlayersLive(): LiveData<List<DatabasePlayer>>
 
-    @Query("SELECT * FROM custom_player_table WHERE country =:country ORDER BY id DESC")
+    @Query("SELECT * FROM player WHERE country =:country ORDER BY id DESC")
     fun getPlayersFromCountry(country: String): LiveData<List<DatabasePlayer>>
 
-    // get the player with the highest ID (last player added)
-    @Query("SELECT * FROM custom_player_table ORDER BY id DESC LIMIT 1")
-    suspend fun getLastPlayer(): DatabasePlayer?
-
     // get the number of players present
-    @Query("SELECT COUNT(*) FROM custom_player_table")
+    @Query("SELECT COUNT(*) FROM player")
     suspend fun numberOfPlayers(): Int
 }

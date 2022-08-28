@@ -6,13 +6,11 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 
 private const val BASE_URL = "https://tennis-live-data.p.rapidapi.com/"
 
@@ -35,9 +33,17 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiService{
 
-    @Headers("X-RapidAPI-Key: 08f9dd6646msh683da6dc2cdc06fp1fee21jsn7fb6de1479aa")
-    @GET("players")
-    fun getPlayers(): Deferred<ApiPlayerContainer>
+    @Headers(
+        "X-RapidAPI-Key: 08f9dd6646msh683da6dc2cdc06fp1fee21jsn7fb6de1479aa",
+        "X-RapidAPI-Host: tennis-live-data.p.rapidapi.com")
+    @GET("players/{tour}")
+    fun getPlayersByTour(@Path("tour") tour: String): Deferred<ApiPlayerContainer>
+
+    @Headers(
+        "X-RapidAPI-Key: 08f9dd6646msh683da6dc2cdc06fp1fee21jsn7fb6de1479aa",
+        "X-RapidAPI-Host: tennis-live-data.p.rapidapi.com")
+    @GET("player/{id}")
+    fun getPlayerById(@Path("id") id: Long): Deferred<ApiPlayerContainer>
 }
 
 object PlayerApi {

@@ -16,6 +16,9 @@ data class ApiPlayerContainer (
 
 /*ApiPlayer, representing a player from the network*/
 data class ApiPlayer(
+    @Json(name = "id")
+    var id: Long = 0L,
+
     @Json(name = "first_name")
     var firstName: String = "",
 
@@ -34,7 +37,8 @@ data class ApiPlayer(
 * */
 fun ApiPlayerContainer.asDomainModel(): List<Player>{
     return apiPlayers.map{
-        Player(firstName = it.firstName,
+        Player(id = it.id,
+            firstName = it.firstName,
             lastName = it.lastName,
             fullName = it.fullName,
             country = it.country)
@@ -48,8 +52,10 @@ fun ApiPlayerContainer.asDomainModel(): List<Player>{
 * */
 fun ApiPlayerContainer.asDatabaseModel(): Array<DatabasePlayer>{
     return apiPlayers.map{
-        DatabasePlayer(firstName = it.firstName,
+        DatabasePlayer(id = it.id,
+            firstName = it.firstName,
             lastName = it.lastName,
+            fullName = it.fullName,
             country = it.country)
     }.toTypedArray()
 }
@@ -59,6 +65,7 @@ fun ApiPlayerContainer.asDatabaseModel(): Array<DatabasePlayer>{
 * */
 fun ApiPlayer.asDatabasePlayer(): DatabasePlayer{
     return DatabasePlayer(
+        id = id,
         firstName = firstName,
         lastName = lastName,
         country = country)

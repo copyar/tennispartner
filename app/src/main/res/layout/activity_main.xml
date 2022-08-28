@@ -28,6 +28,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:popupTheme="@style/Theme.TennisPartner"
+                app:menu="@menu/menu"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
 

@@ -15,22 +15,40 @@ import com.squareup.moshi.Json
 * */
 
 
-@Entity(tableName = "custom_player_table")
+@Entity(tableName = "player")
 data class DatabasePlayer(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0L,
+    @ColumnInfo(name = "id")
+    @Json(name = "id") var id: Long = 0L,
 
     @ColumnInfo(name = "first_name")
-    @Json(name = "setup") var firstName: String = "",
+    @Json(name = "first_name") var firstName: String = "",
 
     @ColumnInfo(name = "last_name")
-    @Json(name = "type") var lastName: String = "",
+    @Json(name = "last_name") var lastName: String = "",
 
     @ColumnInfo(name = "full_name")
-    @Json(name = "type") var fullName: String = "",
+    @Json(name = "full_name") var fullName: String = "",
 
     @ColumnInfo(name = "country")
     @Json(name = "country") var country: String = "",
+
+    @ColumnInfo(name = "ranking")
+    @Json(name = "ranking") var ranking: Int = 0,
+
+    @ColumnInfo(name = "ranking_movement")
+    @Json(name = "ranking_movement") var rankingMovement: Int = 0,
+
+    @ColumnInfo(name = "ranking_points")
+    @Json(name = "ranking_points") var rankingPoints: Int = 0,
+
+    @ColumnInfo(name = "race_ranking")
+    @Json(name = "race_ranking") var raceRanking: Int = 0,
+
+    @ColumnInfo(name = "race_movement")
+    @Json(name = "race_movement") var raceMovement: Int = 0,
+
+    @ColumnInfo(name = "race_points")
+    @Json(name = "race_points") var racePoints: Int = 0,
 
     )
 
@@ -39,10 +57,15 @@ data class DatabasePlayer(
 fun List<DatabasePlayer>.asDomainModel() : List<Player>{
     return map {
         Player(
+            id = it.id,
             firstName = it.firstName,
             lastName = it.lastName,
             fullName = it.fullName,
-            country = it.country
+            country = it.country,
+            ranking = it.ranking,
+            rankingMovement = it.rankingMovement,
+            rankingPoints = it.rankingPoints,
+
         )
     }
 }
