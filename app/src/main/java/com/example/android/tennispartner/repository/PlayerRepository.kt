@@ -24,9 +24,8 @@ class PlayerRepository(private val database: PlayerDatabase) {
 
     // Network call
     // get players from the database, but transform them with map
-    val players = MediatorLiveData<List<Player>>()
     val filter = MutableLiveData<String>(null)
-    val playersSolution2 = Transformations.switchMap(filter) {
+    val players = Transformations.switchMap(filter) {
             filter -> when (filter) {
         "country" -> Transformations.map(database.playerDatabaseDao.getPlayersFromCountry(country = "")){
             it.asDomainModel()
@@ -37,44 +36,11 @@ class PlayerRepository(private val database: PlayerDatabase) {
     }
     }
 
-    // keep a reference to the original livedata
-    private var changeableLiveData = Transformations.map(database.playerDatabaseDao.getAllPlayersLive()){
-        it.asDomainModel()
-    }
-
-    // add the data to the mediator
-    init {
-        players.addSource(
-            changeableLiveData
-        ){
-            players.setValue(it)
-        }
-    }
-
-    // Filter
-    fun addFilter(filter: String?) {
-        // remove the original source
-        players.removeSource(changeableLiveData)
-        // change the livedata object + apply filter
-        changeableLiveData = when(filter){
-            "country" -> Transformations.map(database.playerDatabaseDao.getPlayersFromCountry(country = "")){
-                it.asDomainModel()
-            }
-            else -> Transformations.map(database.playerDatabaseDao.getAllPlayersLive()){
-                it.asDomainModel()
-            }
-        }
-        // add the data to the mediator
-        players.addSource(changeableLiveData){ players.setValue(it) }
-    }
-
-
     // filter is now less complex
-    fun addFilterSolution2(filter: String?) {
+    fun addFilter(filter: String?) {
         // remove the original source
         this.filter.value = filter
     }
-
 
     // Database call
     suspend fun refreshPlayers(tour: String) {
@@ -88,8 +54,7 @@ class PlayerRepository(private val database: PlayerDatabase) {
             Timber.i("end suspend")
         }
     }
-
-
+    
     // create a new player + return the resulting player
     suspend fun createPlayer(newPlayer: Player): Player {
         // create a Data Transfer Object (Dto)

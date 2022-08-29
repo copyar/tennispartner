@@ -27,7 +27,7 @@ abstract class PlayerDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         PlayerDatabase::class.java,
-                        "custom_player_database"
+                        "player"
                     )
                         .fallbackToDestructiveMigration()
                         .build()
