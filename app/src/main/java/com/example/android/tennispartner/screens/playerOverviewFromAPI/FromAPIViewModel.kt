@@ -3,6 +3,7 @@ package com.example.android.tennispartner.screens.playerOverviewFromAPI
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.android.tennispartner.database.players.PlayerDatabase
+import com.example.android.tennispartner.domain.Player
 import com.example.android.tennispartner.repository.PlayerRepository
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -28,6 +29,10 @@ class FromAPIViewModel(application: Application): AndroidViewModel(application) 
            playerRepository.refreshPlayers("ATP")
             _status.value = PlayerApiStatus.DONE
         }
+    }
+
+    fun getFirst(): Player? {
+        return players?.value?.get(0)
     }
 
     override fun onCleared() {

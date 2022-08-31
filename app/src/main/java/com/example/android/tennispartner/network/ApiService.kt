@@ -34,14 +34,16 @@ private val retrofit = Retrofit.Builder()
 interface ApiService{
 
     @Headers(
-        "X-RapidAPI-Key: 08f9dd6646msh683da6dc2cdc06fp1fee21jsn7fb6de1479aa",
-        "X-RapidAPI-Host: tennis-live-data.p.rapidapi.com")
+        "X-RapidAPI-Key: a5ef88a05emsh47a5156a83e2455p11ff42jsneffc3af46e47",
+        "X-RapidAPI-Host: tennis-live-data.p.rapidapi.com",
+        "Content-Type: application/json")
     @GET("players/{tour}")
     fun getPlayersByTour(@Path("tour") tour: String): Deferred<ApiPlayerContainer>
 
     @Headers(
-        "X-RapidAPI-Key: 08f9dd6646msh683da6dc2cdc06fp1fee21jsn7fb6de1479aa",
-        "X-RapidAPI-Host: tennis-live-data.p.rapidapi.com")
+        "X-RapidAPI-Key: a5ef88a05emsh47a5156a83e2455p11ff42jsneffc3af46e47",
+        "X-RapidAPI-Host: tennis-live-data.p.rapidapi.com",
+        "Content-Type: application/json")
     @GET("player/{id}")
     fun getPlayerById(@Path("id") id: Long): Deferred<ApiPlayerContainer>
 }

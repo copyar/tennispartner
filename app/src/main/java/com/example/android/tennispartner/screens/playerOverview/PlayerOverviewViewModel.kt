@@ -13,8 +13,6 @@ class PlayerOverviewViewModel(val database: PlayerDatabaseDao, app: Application 
     val db = PlayerDatabase.getInstance(app.applicationContext)
     val repository = PlayerRepository(db)
 
-    //var players = database.getAllPlayersLive()
-    //val players = repository.players
     val players = repository.players
 
 

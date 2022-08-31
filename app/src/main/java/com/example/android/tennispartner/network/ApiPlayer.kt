@@ -10,7 +10,7 @@ import com.squareup.moshi.Json
 
 /*Container helps us parse the body into multiple players*/
 data class ApiPlayerContainer (
-    @Json(name = "body")
+    @Json(name = "players")
     val apiPlayers: List<ApiPlayer>
 )
 

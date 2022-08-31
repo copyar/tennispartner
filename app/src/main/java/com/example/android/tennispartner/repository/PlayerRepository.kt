@@ -46,6 +46,7 @@ class PlayerRepository(private val database: PlayerDatabase) {
     suspend fun refreshPlayers(tour: String) {
         // switch context to IO thread
         withContext(Dispatchers.IO){
+            Timber.i("Execute request")
             val players = PlayerApi.retrofitService.getPlayersByTour(tour).await()
             // '*': kotlin spread operator.
             // Used for functions that expect a vararg param
