@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-       return NavigationUI.onNavDestinationSelected(item, NavController(applicationContext)) || super.onOptionsItemSelected(item)
+       return NavigationUI.onNavDestinationSelected(item, this.findNavController(R.id.navHostFragment)) || super.onOptionsItemSelected(item)
     }
 
     private fun initToolBar() {

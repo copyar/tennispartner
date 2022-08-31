@@ -11,7 +11,6 @@
         <variable
             name="clickListener"
             type="com.example.android.tennispartner.screens.playerOverview.PlayerListener" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,8 +30,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/ic_splash_icon_night"
             app:playerImage="@{player}"/>
-        <!--The benefit is that no matter what the ID is of this imageView, it will be filled in
-        if e.g you remove the imageview, everything will still work (because no refs are made in the adapter or viewmodel-->
 
         <TextView
             android:id="@+id/player_fullName_textview"

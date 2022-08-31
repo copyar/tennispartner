@@ -21,11 +21,8 @@ import com.google.android.material.chip.Chip
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PlayerOverviewFragment.newInstance] factory method to
- * create an instance of this fragment.
  */
 class PlayerOverviewFragment : Fragment() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +43,6 @@ class PlayerOverviewFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = PlayerDatabase.getInstance(application).playerDatabaseDao
 
-
-
         //filling the list: player adapter
         adapter = PlayerAdapter( PlayerListener{
                 playerID ->
@@ -59,16 +54,15 @@ class PlayerOverviewFragment : Fragment() {
         val viewModelFactory = PlayerOverviewViewModelFactory(dataSource, application, adapter)
         viewModel = ViewModelProvider(this, viewModelFactory).get(PlayerOverviewViewModel::class.java)
 
-
         //databinding
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
 
         //list changed
-        viewModel.players.observe(viewLifecycleOwner, Observer{
+        viewModel.players.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-        })
+        }
 
 
         createChips(listOf("<10", "10-20", ">20"))

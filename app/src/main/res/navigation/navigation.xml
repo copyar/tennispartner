@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/playersFragment"
-        android:name="com.example.android.tennispartner.fragments.PlayerOverviewFragment"
+        android:name="com.example.android.tennispartner.fragments.PlayerOverviewFromAPIFragment"
         android:label="players_fragment"
         tools:layout="@layout/fragment_player_overview"/>
 

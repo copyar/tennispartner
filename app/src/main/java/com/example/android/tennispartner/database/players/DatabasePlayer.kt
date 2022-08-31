@@ -17,6 +17,7 @@ import com.squareup.moshi.Json
 
 @Entity(tableName = "player")
 data class DatabasePlayer(
+    @PrimaryKey
     @ColumnInfo(name = "id")
     @Json(name = "id") var id: Long = 0L,
 
