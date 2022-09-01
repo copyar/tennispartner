@@ -47,13 +47,17 @@ fun ImageView.setImage(imgUrl: String?){
 }
 
 @BindingAdapter("playerFullName")
-fun TextView.bindFullName(player: Player?){
-        text = player?.fullName
+fun TextView.bindFullName(players: List<Player>?){
+    players.let{
+        text = players?.get(0)?.fullName
+    }
 }
 
 @BindingAdapter("playerCountry")
-fun TextView.bindCountry(player: Player?){
-    text = player?.country
+fun TextView.bindCountry(players: List<Player>?){
+    players.let{
+        text = players?.get(0)?.country
+    }
 }
 
 @BindingAdapter("randomPlayer")

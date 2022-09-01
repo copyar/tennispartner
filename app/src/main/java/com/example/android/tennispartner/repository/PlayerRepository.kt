@@ -51,7 +51,7 @@ class PlayerRepository(private val database: PlayerDatabase) {
             // '*': kotlin spread operator.
             // Used for functions that expect a vararg param
             // just spreads the array into separate fields
-            database.playerDatabaseDao.insertAll(*players.asDatabaseModel())
+            database.playerDatabaseDao.insertAll(players.asDatabaseModel())
             Timber.i("end suspend")
         }
     }

@@ -52,11 +52,7 @@ fun PlayerResults.asDomainModel(): List<Player>{
 * */
 fun PlayerResults.asDatabaseModel(): Array<DatabasePlayer>{
     return apiPlayers.map{
-        DatabasePlayer(id = it.id,
-            firstName = it.firstName,
-            lastName = it.lastName,
-            fullName = it.fullName,
-            country = it.country)
+        it.asDatabasePlayer()
     }.toTypedArray()
 }
 
@@ -68,5 +64,6 @@ fun ApiPlayer.asDatabasePlayer(): DatabasePlayer{
         id = id,
         firstName = firstName,
         lastName = lastName,
+        fullName = fullName,
         country = country)
 }
