@@ -20,19 +20,19 @@ class FromAPIViewModel(application: Application): AndroidViewModel(application) 
     private val database = PlayerDatabase.getInstance(application.applicationContext)
     private val playerRepository = PlayerRepository(database)
 
-    val players = playerRepository.players
-
     init {
         Timber.i("getting players")
         viewModelScope.launch {
             _status.value = PlayerApiStatus.LOADING
-           playerRepository.refreshPlayers("ATP")
+            playerRepository.refreshPlayers("ATP")
             _status.value = PlayerApiStatus.DONE
         }
     }
 
+    val players = playerRepository.players
+
     fun getFirst(): Player? {
-        return players?.value?.get(0)
+        return players.value?.get(0)
     }
 
     override fun onCleared() {

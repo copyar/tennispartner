@@ -4,12 +4,12 @@ import com.example.android.tennispartner.database.players.DatabasePlayer
 import com.example.android.tennispartner.domain.Player
 import com.squareup.moshi.Json
 
-/*ApiPlayer: this is a DataTransferObject
-* it's goal is to get network data into our model data, the Player
-*/
+data class PlayerResponse (
+    @Json(name = "results")
+    val playerResults: PlayerResults
+)
 
-/*Container helps us parse the body into multiple players*/
-data class ApiPlayerContainer (
+data class PlayerResults (
     @Json(name = "players")
     val apiPlayers: List<ApiPlayer>
 )
@@ -35,7 +35,7 @@ data class ApiPlayer(
 /*
 * Convert network results into Domain players
 * */
-fun ApiPlayerContainer.asDomainModel(): List<Player>{
+fun PlayerResults.asDomainModel(): List<Player>{
     return apiPlayers.map{
         Player(id = it.id,
             firstName = it.firstName,
@@ -50,7 +50,7 @@ fun ApiPlayerContainer.asDomainModel(): List<Player>{
 *
 * returns an array that can be used in the insert call as vararg
 * */
-fun ApiPlayerContainer.asDatabaseModel(): Array<DatabasePlayer>{
+fun PlayerResults.asDatabaseModel(): Array<DatabasePlayer>{
     return apiPlayers.map{
         DatabasePlayer(id = it.id,
             firstName = it.firstName,

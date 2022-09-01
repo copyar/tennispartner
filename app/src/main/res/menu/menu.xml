@@ -3,6 +3,7 @@
 
     <item
         android:id="@+id/playersFragment"
+        android:name="com.example.android.tennispartner.fragments.PlayerOverviewFromAPIFragment"
         android:title="@string/players" />
     <item
         android:id="@+id/tournamentsFragment"

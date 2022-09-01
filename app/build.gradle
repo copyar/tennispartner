@@ -5,7 +5,6 @@ plugins {
 }
 
 apply from: './ktlint.gradle'
-
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -40,6 +39,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs = ['-Xjvm-default=enable']
     }
 }
 

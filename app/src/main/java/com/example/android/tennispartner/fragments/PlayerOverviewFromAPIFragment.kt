@@ -18,7 +18,7 @@ class PlayerOverviewFromAPIFragment: Fragment() {
         val activity = requireNotNull(this.activity)
         ViewModelProvider(this,
             FromAPIViewModel.Factory(activity.application)
-        ).get(FromAPIViewModel::class.java)
+        )[FromAPIViewModel::class.java]
     }
 
 

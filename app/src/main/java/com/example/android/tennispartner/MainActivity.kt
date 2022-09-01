@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-       return NavigationUI.onNavDestinationSelected(item, this.findNavController(R.id.navHostFragment)) || super.onOptionsItemSelected(item)
+       return NavigationUI.onNavDestinationSelected(item, findNavController(R.id.navHostFragment)) || super.onOptionsItemSelected(item)
     }
 
     private fun initToolBar() {

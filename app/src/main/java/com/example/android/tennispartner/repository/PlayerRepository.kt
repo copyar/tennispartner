@@ -1,6 +1,5 @@
 package com.example.android.tennispartner.repository
 
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.android.tennispartner.database.players.PlayerDatabase
@@ -47,11 +46,27 @@ class PlayerRepository(private val database: PlayerDatabase) {
         // switch context to IO thread
         withContext(Dispatchers.IO){
             Timber.i("Execute request")
-            val players = PlayerApi.retrofitService.getPlayersByTour(tour).await()
+            val response = PlayerApi.retrofitService.getPlayersByTour(tour).await()
+            val players = response.playerResults
             // '*': kotlin spread operator.
             // Used for functions that expect a vararg param
             // just spreads the array into separate fields
             database.playerDatabaseDao.insertAll(*players.asDatabaseModel())
+            Timber.i("end suspend")
+        }
+    }
+
+    // Database call
+    suspend fun getPlayerById(id: Long) {
+        // switch context to IO thread
+        withContext(Dispatchers.IO){
+            Timber.i("Execute request")
+            val response = PlayerApi.retrofitService.getPlayerById(id).await()
+            val player = response.playerDetailResults.apiPlayerDetail
+            // '*': kotlin spread operator.
+            // Used for functions that expect a vararg param
+            // just spreads the array into separate fields
+            database.playerDatabaseDao.insert(player.asDatabasePlayer())
             Timber.i("end suspend")
         }
     }
