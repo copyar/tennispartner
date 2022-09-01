@@ -10,9 +10,8 @@ class PlayerOverviewViewModel(val database: PlayerDatabaseDao, app: Application 
 
     private var currentFilter: String? = null
 
-    val db = PlayerDatabase.getInstance(app.applicationContext)
-    val repository = PlayerRepository(db)
-
+    private val db = PlayerDatabase.getInstance(app.applicationContext)
+    private val repository = PlayerRepository(db)
     val players = repository.players
 
 

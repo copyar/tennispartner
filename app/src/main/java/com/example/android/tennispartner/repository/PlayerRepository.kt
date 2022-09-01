@@ -5,11 +5,8 @@ import androidx.lifecycle.Transformations
 import com.example.android.tennispartner.database.players.PlayerDatabase
 import com.example.android.tennispartner.database.players.asDomainModel
 import com.example.android.tennispartner.domain.Player
-import com.example.android.tennispartner.network.ApiPlayer
-import com.example.android.tennispartner.network.PlayerApi
+import com.example.android.tennispartner.network.*
 import com.example.android.tennispartner.network.PlayerApi.mockPutPlayer
-import com.example.android.tennispartner.network.asDatabasePlayer
-import com.example.android.tennispartner.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -34,6 +31,7 @@ class PlayerRepository(private val database: PlayerDatabase) {
         }
     }
     }
+    var playersDirect: List<Player>? = null
 
     // filter is now less complex
     fun addFilter(filter: String?) {
@@ -51,7 +49,8 @@ class PlayerRepository(private val database: PlayerDatabase) {
             // '*': kotlin spread operator.
             // Used for functions that expect a vararg param
             // just spreads the array into separate fields
-            database.playerDatabaseDao.insertAll(players.asDatabaseModel())
+            playersDirect = response.playerResults.asDomainModel()
+            database.playerDatabaseDao.insertAll(*players.asDatabaseModel())
             Timber.i("end suspend")
         }
     }
